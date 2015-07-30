@@ -4,7 +4,7 @@
 
 ###プログラム概要###
 本プロジェクトでは, ビルドツールとして`gradle`を用いている.
-gradleを使用してのコンパイル方法は, `gradle build.gradle`となる.
+gradleを使用してのコンパイル方法は, `gradle build`となる.
 この場合は, 生成されたjarファイルを実行すれば良い.
 
 gradleが導入されていない場合は, `javac`にて`ChatServer.java`をコンパイルし, 実行すれば良い.
