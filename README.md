@@ -9,7 +9,9 @@ gradleを使用してのコンパイル方法は, `gradle build`となる.
 
 gradleが導入されていない場合は, `javac`にて`ChatServer.java`をコンパイルし, 実行すれば良い.
 
-ChatServerにおいて, クライアント側は`telnet localhost 18080`に接続する.  
+JARファイルは, `java -jar ChatServer.jar`にて実行できる.
+別のターミナルを開いて, `telnet localhost 18080`とすることで, ChatServerに接続できる.
+  
 クライアントは特定のコマンドを用いて, 様々な処理を実行できる. 
   
 * HELP … コマンドの説明を表示
