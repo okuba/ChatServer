@@ -97,7 +97,15 @@ class ChatClientHandler extends Thread
 			}
 		}
 	}
-	
+    
+    /**
+     *名前を取得する.
+     */
+	public String getClientName()
+    {
+        return name;
+    }
+    
 	/**
 	* メッセージを受け取ったときに表示し, その文字列を返す.
 	*/
