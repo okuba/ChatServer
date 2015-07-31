@@ -108,4 +108,14 @@ class ChatClientHandler extends Thread
 
 		return line;
 	}
+	
+	/**
+	* メッセージを送信する.
+	*/
+	void send(String message) throws IOException
+	{
+		out.write(message);
+		out.write("\r\n");
+		out.flush();
+	}
 }
