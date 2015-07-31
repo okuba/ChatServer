@@ -48,6 +48,10 @@ class ChatClientHandler extends Thread
 				{
 					post(commands[1]);
 				}
+                else if (commands[0].equalsIgnoreCase("name"))
+                {
+                    name(commands[1]);
+                }
 			}
 		}
 		catch (IOException anException)
@@ -173,4 +177,30 @@ class ChatClientHandler extends Thread
 		out.write("\r\n");
 		out.flush();
 	}
+
+    /**
+     *名前を付ける.
+     */
+    public void name(String name) throws IOException
+    {
+        String beforeName = getClientName();
+        
+        for (ChatClientHandler aHandler: clients)
+        {
+            if ((aHandler.getClientName()).equals(name))
+            {
+                if(aHandler != this)
+                {
+                    this.send("同じ名前のクライアントが存在します");
+                    this.setClientName(beforeName);
+                    break;
+                }
+            }
+            else
+            {
+                setClientName(name);
+                this.send("["+getClientName()+"]に名前を変更");
+            }
+        }
+    }
 }
