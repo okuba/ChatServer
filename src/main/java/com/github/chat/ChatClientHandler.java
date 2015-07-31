@@ -14,7 +14,7 @@ class ChatClientHandler extends Thread
 	private BufferedReader in;
 	private BufferedWriter out;
 	String name;
-    private int clientNumber;
+    	private int clientNumber;
 	
 	 /**
  	 * コンストラクタ
@@ -24,7 +24,7 @@ class ChatClientHandler extends Thread
 		this.socket = socket;
 		this.clients = clients;
 		this.name = "undefiend"+(clients.size()+1);
-        this.clientNumber = clients.size();
+        	this.clientNumber = clients.size();
 	}
 
 	/**
@@ -39,28 +39,28 @@ class ChatClientHandler extends Thread
 			while (true)
 			{
 				String message = receive();
-                String[] commands = message.split(" ");
-                if (commands[0].equalsIgnoreCase("bye"))
-                {
-                    bye();
-                }
+                		String[] commands = message.split(" ");
+                		if (commands[0].equalsIgnoreCase("bye"))
+                		{
+                    			bye();
+                		}
 				else if (commands[0].equalsIgnoreCase("post"))
 				{
 					post(commands[1]);
 				}
-                else if (commands[0].equalsIgnoreCase("name"))
-                {
-                    name(commands[1]);
-                }
+                		else if (commands[0].equalsIgnoreCase("name"))
+                		{
+                    			name(commands[1]);
+                		}
 				else if (commands[0].equalsIgnoreCase("whoami"))
 				{
 					whoami();
 				}
-                else if (commands[0].equalsIgnoreCase("users"))
-                {
-                    users();
-                }
-				else (commands[0].equalsIgnoreCase("help"))
+                		else if (commands[0].equalsIgnoreCase("users"))
+                		{
+                    			users();
+                		}
+				else if (commands[0].equalsIgnoreCase("help"))
 				{
 					help();
 				}
@@ -236,8 +236,8 @@ class ChatClientHandler extends Thread
     }
 	
 	/**
-		* 使用できるコマンドを一覧表示する.
-		*/
+	* 使用できるコマンドを一覧表示する.
+	*/
 	void help() throws IOException
 	{
 		this.send("HELP … コマンドの説明を表示");
