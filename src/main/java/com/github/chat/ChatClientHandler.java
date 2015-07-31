@@ -14,6 +14,7 @@ class ChatClientHandler extends Thread
 	private BufferedReader in;
 	private BufferedWriter out;
 	String name;
+    private int clientNumber;
 	
 	 /**
  	 * コンストラクタ
@@ -23,6 +24,7 @@ class ChatClientHandler extends Thread
 		this.socket = socket;
 		this.clients = clients;
 		this.name = "undefiend"+(clients.size()+1);
+        this.clientNumber = clients.size();
 	}
 
 	/**
@@ -37,6 +39,11 @@ class ChatClientHandler extends Thread
 			while (true)
 			{
 				String message = receive();
+                String[] commands = message.split(" ");
+                if(commands[0].equalsIgnoreCase("bye"))
+                {
+                    bye();
+                }
 			}
 		}
 		catch (IOException anException)
@@ -97,6 +104,19 @@ class ChatClientHandler extends Thread
 			}
 		}
 	}
+    
+    public void bye() throws IOException
+    {
+        for(ChatClientHandler aHandler: clients)
+        {
+            if(aHandler != this)
+            {
+                aHandler.send("["+this.getClientName()+"]leaved");
+            }
+        }
+        clients.remove(this.clientNumber);
+        close();
+    }
     
     /**
      *名前を取得する.
