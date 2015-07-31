@@ -106,6 +106,14 @@ class ChatClientHandler extends Thread
         return name;
     }
     
+    /**
+     *名前を変更する.
+     */
+    public void setClientName(String setName)
+    {
+        this.name = setName;
+    }
+    
 	/**
 	* メッセージを受け取ったときに表示し, その文字列を返す.
 	*/
