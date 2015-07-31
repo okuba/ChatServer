@@ -25,7 +25,6 @@ class ChatClientHandler extends Thread
 		this.name = "undefiend"+(clients.size()+1);
 	}
 
-
 	/**
 	* コマンドを受け付け, 対応する各処理を行う.
 	*/
@@ -40,39 +39,7 @@ class ChatClientHandler extends Thread
 		}		
 		finally
 		{
-			if (in != null)
-			{
-				try
-				{ 
-					in.close();
-				}
-				catch (IOException anException)
-				{
-					anException.printStackTrace();
-				}
-			} 
-			if (out != null)
-			{
-				try
-				{
-					out.close();
-				}
-				catch (IOException anException)
-				{
-					anException.printStackTrace();
-				}
-			}
-			if (socket != null)
-			{
-				try
-				{
-					socket.close();
-				}
-				catch (IOException anException)
-				{
-					anException.printStackTrace();
-				}
-			}
+			close();
 		}
 	}
 	
@@ -83,5 +50,46 @@ class ChatClientHandler extends Thread
 	{
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+	}
+	
+	/**
+	* ストリームとソケットを閉じる.
+	*/
+	public void close()
+	{
+
+		if (in != null)
+		{
+			try
+			{ 
+				in.close();
+			}
+			catch (IOException anException)
+			{
+				anException.printStackTrace();
+			}
+		} 
+		if (out != null)
+		{
+			try
+			{
+				out.close();
+			}
+			catch (IOException anException)
+			{
+				anException.printStackTrace();
+			}
+		}
+		if (socket != null)
+		{
+			try
+			{
+				socket.close();
+			}
+			catch (IOException anException)
+			{
+				anException.printStackTrace();
+			}
+		}
 	}
 }
