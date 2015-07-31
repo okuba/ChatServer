@@ -40,10 +40,14 @@ class ChatClientHandler extends Thread
 			{
 				String message = receive();
                 String[] commands = message.split(" ");
-                if(commands[0].equalsIgnoreCase("bye"))
+                if (commands[0].equalsIgnoreCase("bye"))
                 {
                     bye();
                 }
+				else if (commands[0].equalsIgnoreCase("post"))
+				{
+					post(commands[1]);
+				}
 			}
 		}
 		catch (IOException anException)
@@ -104,12 +108,27 @@ class ChatClientHandler extends Thread
 			}
 		}
 	}
-    
+	/**
+		* 他のクライアント全てに指定したメッセージを送信する.
+		*/
+	public void post(String message) throws IOException
+	{
+		ArrayList<ChatClientHandler> allClientHandler = new ArrayList<ChatClientHandler>();
+		
+		for (ChatClientHandler clientHandler: clients)
+		{
+			if (clientHandler	!= this)
+			{
+				clientHandler.send("["+this.getClientName()+"]"+message);
+			}
+		}
+	}
+	
     public void bye() throws IOException
     {
-        for(ChatClientHandler aHandler: clients)
+        for (ChatClientHandler aHandler: clients)
         {
-            if(aHandler != this)
+            if (aHandler != this)
             {
                 aHandler.send("["+this.getClientName()+"]leaved");
             }
