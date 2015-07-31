@@ -52,6 +52,10 @@ class ChatClientHandler extends Thread
                 {
                     name(commands[1]);
                 }
+				else if (commands[0].equalsIgnoreCase("whoami"))
+				{
+					whoami();
+				}
 			}
 		}
 		catch (IOException anException)
@@ -203,4 +207,12 @@ class ChatClientHandler extends Thread
             }
         }
     }
+	
+	/**
+		* 自分の名前を表示する.
+		*/
+	public void whoami() throws IOException
+	{
+		this.send("["+this.getClientName()+"]");
+	}
 }
