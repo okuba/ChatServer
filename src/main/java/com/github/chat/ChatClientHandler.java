@@ -33,6 +33,11 @@ class ChatClientHandler extends Thread
 		try
 		{
 			open();
+			
+			while (true)
+			{
+				String message = receive();
+			}
 		}
 		catch (IOException anException)
 		{
@@ -91,5 +96,16 @@ class ChatClientHandler extends Thread
 				anException.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	* メッセージを受け取ったときに表示し, その文字列を返す.
+	*/
+	String receive() throws IOException
+	{
+		String line = in.readLine();
+		System.out.println(line);
+
+		return line;
 	}
 }
