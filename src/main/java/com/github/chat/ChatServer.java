@@ -8,10 +8,16 @@ import java.util.*;
 public class ChatServer
 {
     private ServerSocket server;
+    private ArrayList<ChatClientHandler> clients = new ArrayList<ChatClientHandler>();
+    
+    private BufferedReader in;
+    private BufferedWriter out;
+    
     
     public void listen()
     {
         Socket socket = null;
+        ChatClientHandler handler = null;
         
         try
         {
@@ -22,6 +28,10 @@ public class ChatServer
             {
                 socket = server.accept();
                 System.out.println("new connect ... ...");
+                handler = new ChatClientHandler(socket,clients);
+                
+                clients.add(handler);
+                handler.start();
             }
         }
         catch(IOException anException)
@@ -40,6 +50,10 @@ public class ChatServer
                 {
                     anException.printStackTrace();
                 }
+            }
+            if(handler != null)
+            {
+                handler.close();
             }
         }
     }
