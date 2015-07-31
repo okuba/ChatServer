@@ -56,6 +56,10 @@ class ChatClientHandler extends Thread
 				{
 					whoami();
 				}
+                else if (commands[0].equalsIgnoreCase("users"))
+                {
+                    users();
+                }
 			}
 		}
 		catch (IOException anException)
@@ -203,9 +207,9 @@ class ChatClientHandler extends Thread
             else
             {
                 setClientName(name);
-                this.send("["+getClientName()+"]に名前を変更");
             }
         }
+        this.send("["+getClientName()+"]に名前を変更");
     }
 	
 	/**
@@ -215,4 +219,15 @@ class ChatClientHandler extends Thread
 	{
 		this.send("["+this.getClientName()+"]");
 	}
+    
+    /**
+     *全クライアントの名前の一覧を表示する.
+     */
+    public void users() throws IOException
+    {
+        for (ChatClientHandler clientHandler: clients)
+        {
+            this.send("["+clientHandler.getClientName()+"]");
+        }
+    }
 }
