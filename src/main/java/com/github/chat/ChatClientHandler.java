@@ -60,6 +60,10 @@ class ChatClientHandler extends Thread
                 {
                     users();
                 }
+				else (commands[0].equalsIgnoreCase("help"))
+				{
+					help();
+				}
 			}
 		}
 		catch (IOException anException)
@@ -230,4 +234,17 @@ class ChatClientHandler extends Thread
             this.send("["+clientHandler.getClientName()+"]");
         }
     }
+	
+	/**
+		* 使用できるコマンドを一覧表示する.
+		*/
+	void help() throws IOException
+	{
+		this.send("HELP … コマンドの説明を表示");
+		this.send("NAME … 名前の変更を行う(他のユーザと同名は付けることはできない");
+		this.send("WHOAMI … クライアント自身の名前を表示");
+		this.send("BYE … チャットを終了する");
+		this.send("POST … 全員にメッセージを送信");
+		this.send("USERS … 自分を含めて, 接続中のユーザ名を一覧で表示");
+	}
 }
