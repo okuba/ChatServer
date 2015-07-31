@@ -1,3 +1,5 @@
+package com.github.chat;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
