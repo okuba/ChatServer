@@ -11,6 +11,8 @@ class ChatClientHandler extends Thread
 {
 	ArrayList<ChatClientHandler> clients = new ArrayList<ChatClientHandler>();
 	private Socket socket;
+	private BufferedReader in;
+	private BufferedWriter out;
 	String name;
 	
 	 /**
@@ -21,7 +23,6 @@ class ChatClientHandler extends Thread
 		this.socket = socket;
 		this.clients = clients;
 		this.name = "undefiend"+(clients.size()+1);
-		this.clientNumber = clients.size();
 	}
 
 
@@ -30,6 +31,57 @@ class ChatClientHandler extends Thread
 	*/
 	public void run()
 	{
-
+		try
+		{
+			open();
+		}
+		catch (IOException anException)
+		{
+		}		
+		finally
+		{
+			if (in != null)
+			{
+				try
+				{ 
+					in.close();
+				}
+				catch (IOException anException)
+				{
+					anException.printStackTrace();
+				}
+			} 
+			if (out != null)
+			{
+				try
+				{
+					out.close();
+				}
+				catch (IOException anException)
+				{
+					anException.printStackTrace();
+				}
+			}
+			if (socket != null)
+			{
+				try
+				{
+					socket.close();
+				}
+				catch (IOException anException)
+				{
+					anException.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/**
+	* 読み込むための準備をする.
+	*/
+	void open() throws IOException
+	{
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 	}
 }
